@@ -1,0 +1,38 @@
+def int_to_roman(num):
+    # List of tuples containing Roman numeral symbols and their corresponding integer values
+    val = [
+        (1000, 'M'),
+        (900, 'CM'),
+        (500, 'D'),
+        (400, 'CD'),
+        (100, 'C'),
+        (90, 'XC'),
+        (50, 'L'),
+        (40, 'XL'),
+        (10, 'X'),
+        (9, 'IX'),
+        (5, 'V'),
+        (4, 'IV'),
+        (1, 'I')
+    ]
+    
+    # Initialize the result string
+    roman_num = ''
+    
+    # Loop through the list of tuples
+    for (value, symbol) in val:
+        # Determine how many times the Roman numeral symbol should be repeated
+        count = num // value
+        # Append the Roman numeral symbol repeated the appropriate number of times to the result string
+        roman_num += symbol * count
+        # Subtract the corresponding value from the integer
+        num -= value * count
+        
+    return roman_num
+
+# Example usage
+print(int_to_roman(3))    # Output: III
+print(int_to_roman(4))    # Output: IV
+print(int_to_roman(9))    # Output: IX
+print(int_to_roman(58))   # Output: LVIII
+print(int_to_roman(1994)) # Output: MCMXCIV
