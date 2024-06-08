@@ -13,4 +13,23 @@ def roman_to_int(s):
     # Initialize the result integer
     total = 0
     # Length of the input string
-    n = len
+    n = len(s)
+    
+    # Loop through the string
+    for i in range(n):
+        # If the current character is not the last one and its value is less than the next character's value
+        if i < n - 1 and roman_dict[s[i]] < roman_dict[s[i + 1]]:
+            # Subtract the current character's value
+            total -= roman_dict[s[i]]
+        else:
+            # Add the current character's value
+            total += roman_dict[s[i]]
+    
+    return total
+
+# Example usage
+print(roman_to_int("III"))    # Output: 3
+print(roman_to_int("IV"))     # Output: 4
+print(roman_to_int("IX"))     # Output: 9
+print(roman_to_int("LVIII"))  # Output: 58
+print(roman_to_int("MCMXCIV")) # Output: 1994
