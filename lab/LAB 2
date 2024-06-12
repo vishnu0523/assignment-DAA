@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cmath>
+#include <cstring>
+using namespace std;
+int power(int num, int p) {
+    if (p == 0) return 1;
+    return num * power(num, p - 1);
+}
+bool isArmstrong(int num, int len, int temp) {
+    if (temp == 0) return 0;
+    return power(temp % 10, len) + isArmstrong(num, len, temp / 10) == num;
+}
+int main() {
+    int num;
+    cout << "Enter a number: ";
+    cin >> num;
+    int len = to_string(num).length();
+    if (isArmstrong(num, len, num))
+        cout << num << " is an Armstrong number.";
+    else
+        cout << num << " is not an Armstrong number.";
+    return 0;
+}
