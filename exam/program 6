@@ -1,0 +1,25 @@
+def permuteUnique(nums):
+    def backtrack(path, used):
+        if len(path) == len(nums):
+            results.append(path[:])
+            return
+        
+        local_used = set()
+        for i in range(len(nums)):
+            if used[i] or nums[i] in local_used:
+                continue
+            local_used.add(nums[i])
+            path.append(nums[i])
+            used[i] = True
+            backtrack(path, used)
+            path.pop()
+            used[i] = False
+    
+    nums.sort()
+    results = []
+    used = [False] * len(nums)
+    backtrack([], used)
+    return results
+
+nums = [1, 1, 2]
+print(permuteUnique(nums))  # Output: [[1, 1, 2], [1, 2, 1], [2, 1, 1]]
