@@ -6,7 +6,7 @@ def removeElement(nums, val):
             k += 1
     return k
 
-# Example usage:
+
 nums = [3, 2, 2, 3]
 val = 3
 
