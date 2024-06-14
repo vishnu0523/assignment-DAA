@@ -1,0 +1,23 @@
+def min_fuel_cost(n, roads, seats):
+    from collections import defaultdict
+    graph = defaultdict(list)
+    
+    for a, b in roads:
+        graph[a].append(b)
+        graph[b].append(a)
+
+    def dfs(node, parent):
+        trips, people = 0, 1 
+        for neighbor in graph[node]:
+            if neighbor != parent:
+                sub_trips, sub_people = dfs(neighbor, node)
+                trips += sub_trips + (sub_people + seats - 1) // seats  
+                people += sub_people
+        return trips, people
+
+    total_trips, _ = dfs(0, -1)
+    return total_trips
+roads = [[3,1],[3,2],[1,0],[0,4],[0,5],[4,6]]
+seats =2
+n = 4
+print(min_fuel_cost(n, roads, seats))  
