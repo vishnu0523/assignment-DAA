@@ -1,0 +1,68 @@
+from collections import deque
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+def minimum_operations_to_sort_tree(root):
+    if not root:
+        return 0
+    def bfs(node):
+        queue = deque([node])
+        levels = []
+        
+        while queue:
+            level_size = len(queue)
+            current_level = []
+            
+            for _ in range(level_size):
+                curr = queue.popleft()
+                current_level.append(curr.val)
+                
+                if curr.left:
+                    queue.append(curr.left)
+                if curr.right:
+                    queue.append(curr.right)
+                    
+            levels.append(current_level)
+        
+        return levels
+
+    levels = bfs(root)
+    total_swaps = 0
+    
+    for level in levels:
+        sorted_level = sorted(level)
+        swaps = 0
+        
+
+        visited = [False] * len(level)
+        
+        for i in range(len(level)):
+            if visited[i] or level[i] == sorted_level[i]:
+                continue
+            
+            cycle_length = 0
+            x = i
+            
+            while not visited[x]:
+                visited[x] = True
+                x = level.index(sorted_level[x])
+                cycle_length += 1
+            
+            if cycle_length > 0:
+                swaps += (cycle_length - 1)
+        
+        total_swaps += swaps
+        
+    return total_swaps
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+root.right.left = TreeNode(6)
+
+
+print(minimum_operations_to_sort_tree(root))
