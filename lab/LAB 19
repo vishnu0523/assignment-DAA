@@ -1,0 +1,17 @@
+def sort_half_odd_half_even(nums):
+    odd_index = 0
+    even_index = 1
+    n = len(nums)
+    
+    while odd_index < n and even_index < n:
+        if nums[odd_index] % 2 == 0:
+            while even_index < n and nums[even_index] % 2 == 0:
+                even_index += 2
+            if even_index < n:
+                nums[odd_index], nums[even_index] = nums[even_index], nums[odd_index]
+        odd_index += 2
+
+    return nums
+
+nums = [4, 1, 2, 3, 6, 7, 8, 5]
+print(sort_half_odd_half_even(nums))
