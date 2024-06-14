@@ -1,0 +1,17 @@
+def master_theorem(n):
+    if n == 1:
+        return 1
+    return 2 * master_theorem(n // 2) + n  # O(n log n)
+print(master_theorem(8))  # O(n log n)
+
+def substitution_method(n):
+    if n == 1:
+        return 1
+    return substitution_method(n - 1) + 1  # O(n)
+print(substitution_method(5))  # O(n)
+
+def iteration_method(n):
+    if n == 1:
+        return 1
+    return 2 * iteration_method(n // 2) + n  # O(n log n)
+print(iteration_method(8))  # O(n log n)
