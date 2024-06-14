@@ -1,0 +1,6 @@
+def convert_temperature(celsius):
+    kelvin = celsius + 273.15
+    fahrenheit = celsius * 1.80 + 32.00
+    return [round(kelvin, 5), round(fahrenheit, 5)]
+print(convert_temperature(36.50)) 
+print(convert_temperature(122.11)) 
