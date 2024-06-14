@@ -1,0 +1,10 @@
+from itertools import permutations
+nums = [1,1,2]
+perm=permutations(nums)
+for i in list(perm):
+    print(i)
+print("\n")
+nums = [1,2,3]
+perm=permutations(nums)
+for i in list(perm):
+    print(i)
