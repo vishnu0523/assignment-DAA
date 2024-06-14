@@ -1,0 +1,13 @@
+def count_unequal_triplets(nums):
+    triplets_count = 0
+    n = len(nums)
+    
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                if nums[i] != nums[j] and nums[i] != nums[k] and nums[j] != nums[k]:
+                    triplets_count += 1
+    
+    return triplets_count
+nums = [1,1,1,1,1]
+print(count_unequal_triplets(nums)) 
