@@ -1,0 +1,26 @@
+def max_non_overlapping_palindromes(s, k):
+    n = len(s)
+    dp = [[False] * n for _ in range(n)]
+    
+    for length in range(1, n + 1):
+        for i in range(n - length + 1):
+            j = i + length - 1
+            if length == 1:
+                dp[i][j] = True
+            elif length == 2:
+                dp[i][j] = (s[i] == s[j])
+            else:
+                dp[i][j] = (s[i] == s[j]) and dp[i + 1][j - 1]
+
+    count = 0
+    end = -1
+    
+    for i in range(n):
+        for j in range(i + k - 1, n):
+            if dp[i][j] and i > end:
+                count += 1
+                end = j
+    
+    return count
+print(max_non_overlapping_palindromes("abaccdbbd", 3)) 
+print(max_non_overlapping_palindromes("adbcda", 2))     
