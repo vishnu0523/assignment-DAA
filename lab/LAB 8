@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+bool isPrime(int num, int i) {
+    if (num <= 2)
+        return (num == 2) ? true : false;
+    if (num % i == 0)
+        return false;
+    if (i * i > num)
+        return true;
+    return isPrime(num, i + 1);
+}
+void printPrimes(int n, int current) {
+    if (current > n)
+        return;
+    if (isPrime(current, 2))
+        cout << current << " ";
+    printPrimes(n, current + 1);
+}
+int main() {
+    int n;
+    cout << "Enter the limit: ";
+    cin >> n;
+    printPrimes(n, 2);
+    return 0;
+}
