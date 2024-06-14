@@ -1,0 +1,46 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def inorder_traversal(root):
+    if root is None:
+        return []
+    return inorder_traversal(root.left) + [root.val] + inorder_traversal(root.right)
+
+def closest_nodes(root, queries):
+    sorted_vals = inorder_traversal(root)
+    result = []
+
+    for q in queries:
+        mini = -1
+        maxi = -1
+        left, right = 0, len(sorted_vals) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            if sorted_vals[mid] <= q:
+                mini = sorted_vals[mid]
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        left, right = 0, len(sorted_vals) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            if sorted_vals[mid] >= q:
+                maxi = sorted_vals[mid]
+                right = mid - 1
+            else:
+                left = mid + 1
+
+        result.append([mini, maxi])
+
+    return result
+root = TreeNode(6)
+root.left = TreeNode(2, TreeNode(1), TreeNode(4))
+root.right = TreeNode(13, TreeNode(9), TreeNode(15, TreeNode(14)))
+queries = [2, 5, 16]
+print(closest_nodes(root, queries))  
