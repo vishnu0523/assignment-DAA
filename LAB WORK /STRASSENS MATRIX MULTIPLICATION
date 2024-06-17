@@ -1,0 +1,24 @@
+def strassen(A, B):
+
+    if len(A) <= 2 or len(B) <= 2:
+        return [[sum(e*f for e,f in zip(a,b)) for b in zip(*B)] for a in zip(*A)]
+    n = len(A)
+    a11, a12, a21, a22 = [A[i][j:n+j] for j in range(0, n, n)]
+    b11, b12, b21, b22 = [B[i][j:n+j] for j in range(0, n, n)]
+    m1 = strassen(a11, b12 - b22)
+    m2 = strassen(a11 + a12, b22)
+    m3 = strassen(a21 + a22, b11)
+    m4 = strassen(a22, b21 - b11)
+    m5 = strassen(a11 + a22, b11 + b22)
+    m6 = strassen(a12 - a22, b21 + b22)
+    m7 = strassen(a11 - a21, b11 + b12)
+    c11 = m5 + m4 - m2 + m6
+    c12 = m1 + m2
+    c21 = m3 + m4
+    c22 = m1 + m5 - m3 - m7
+
+    return [c11, c12, c21, c22]
+A = [[1, 2], [3, 4]]
+B = [[5, 6], [7, 8]]
+C = strassen(A, B)
+print(C) 
