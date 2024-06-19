@@ -1,0 +1,46 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def height(self, node):
+        if not node:
+            return 0
+        return max(self.height(node.left), self.height(node.right)) + 1
+
+    def removeSubtree(self, root, queries):
+        self.result = []
+
+        def copy_tree(node):
+            if not node:
+                return None
+            return TreeNode(node.val, copy_tree(node.left), copy_tree(node.right))
+
+        def dfs(node, val):
+            if not node:
+                return
+            if node.val == val:
+                return None
+            node.left = dfs(node.left, val)
+            node.right = dfs(node.right, val)
+            return node
+
+        for query in queries:
+            tree_copy = copy_tree(root)
+            tree_copy = dfs(tree_copy, query)
+            self.result.append(self.height(tree_copy))
+
+        return self.result
+root = TreeNode(1)
+root.left = TreeNode(3)
+root.right = TreeNode(4)
+root.left.left = TreeNode(2)
+root.right.left = TreeNode(6)
+root.right.right = TreeNode(5)
+root.right.right.right = TreeNode(7)
+queries = [4]
+solution = Solution()
+result = solution.removeSubtree(root, queries)
+print(result)
