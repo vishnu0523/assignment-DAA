@@ -1,0 +1,12 @@
+def number_of_distinct_averages(nums):
+    nums.sort()
+    averages = set()
+    
+    while nums:
+        min_val = nums.pop(0)
+        max_val = nums.pop()
+        averages.add((min_val + max_val) / 2)
+    
+    return len(averages)
+nums = [1,100]
+print(number_of_distinct_averages(nums))  
