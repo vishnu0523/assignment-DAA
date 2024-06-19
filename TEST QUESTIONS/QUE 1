@@ -1,0 +1,15 @@
+def min_length_after_operations(nums):
+    left = 0
+    right = len(nums) - 1
+    removed_count = 0
+    
+    while left < right:
+        if nums[left] < nums[right]:
+            removed_count += 2
+            left += 1
+            right -= 1
+        else:
+            right -= 1
+    return len(nums) - removed_count
+nums = [1, 2, 3, 4]
+print(min_length_after_operations(nums))
