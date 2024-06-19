@@ -1,0 +1,30 @@
+from heapq import heappop, heappush
+def total_cost_to_hire_workers(costs, k, candidates):
+    left = 0
+    right = len(costs) - 1
+    min_heap = []
+    
+    for i in range(candidates):
+        heappush(min_heap, (costs[i], i))
+        if right - i >= 0:
+            heappush(min_heap, (costs[right - i], right - i))
+    
+    total_cost = 0
+    for _ in range(k):
+        cost, idx = heappop(min_heap)
+        total_cost += cost
+        
+        if idx <= left:
+            left += 1
+            if left < len(costs):
+                heappush(min_heap, (costs[left], left))
+        else:
+            right -= 1
+            if right >= 0:
+                heappush(min_heap, (costs[right], right))
+    
+    return total_cost
+costs = [1,2,4,1]
+k = 3
+candidates = 3
+print(total_cost_to_hire_workers(costs, k, candidates))
