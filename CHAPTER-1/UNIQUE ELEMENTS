@@ -1,0 +1,16 @@
+def unique_elements(nums):
+    seen = set()
+    unique_list = []
+    for num in nums:
+        if num not in seen:
+            seen.add(num)
+            unique_list.append(num)
+    return unique_list
+test_cases = [
+    ([3, 7, 3, 5, 2, 5, 9, 2], [3, 7, 5, 2, 9]),
+    ([-1, 2, -1, 3, 2, -2], [-1, 2, 3, -2]),
+    ([1000000, 999999, 1000000], [1000000, 999999])
+]
+for nums, expected in test_cases:
+    result = unique_elements(nums)
+    print(f"Input: {nums} | Expected Output: {expected} | Actual Output: {result}")
