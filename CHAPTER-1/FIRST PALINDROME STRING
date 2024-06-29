@@ -1,0 +1,7 @@
+def palindrome(words):
+    for w in words:
+        if w==w[::-1]:
+           return w
+    return ""
+words1=["ada","racecar","vishnu"]
+print(palindrome(words1))
