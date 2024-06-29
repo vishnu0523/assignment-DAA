@@ -1,0 +1,17 @@
+def process_list(nums):
+    if not nums:
+        return "The list is empty."
+
+    sorted_nums = sorted(nums)
+
+    max_value = sorted_nums[-1]
+
+    return max_value
+test_cases = [
+    ([], "The list is empty."),
+    ([5], 5),
+    ([3, 3, 3, 3, 3], 3)
+]
+for nums, expected in test_cases:
+    result = process_list(nums)
+    print(f"Input: {nums} | Expected Output: {expected} | Actual Output: {result}")
