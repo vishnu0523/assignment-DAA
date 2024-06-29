@@ -1,0 +1,15 @@
+def find_max(nums):
+    max_value = nums[0]
+    for num in nums:
+        if num > max_value:
+            max_value = num
+    
+    return max_value
+test_cases = [
+    ([1, 2, 3, 4, 5], 5),
+    ([7, 7, 7, 7, 7], 7),
+    ([-10, 2, 3, -4, 5], 5)
+]
+for nums, expected in test_cases:
+    result = find_max(nums)
+    print(f"Input: {nums} | Expected Output: {expected} | Actual Output: {result}")
