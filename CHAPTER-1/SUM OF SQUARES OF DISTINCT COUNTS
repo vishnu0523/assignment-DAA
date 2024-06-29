@@ -1,0 +1,17 @@
+def sum_of_squares_of_distinct_counts(nums):
+    n = len(nums)
+    total_sum = 0
+    
+      for i in range(n):
+        distinct_count = 0
+        seen = set()
+        
+        for j in range(i, n):
+            if nums[j] not in seen:
+                distinct_count += 1
+                seen.add(nums[j])
+            total_sum += distinct_count ** 2
+            
+    return total_sum
+nums = [1, 2, 1]
+print(sum_of_squares_of_distinct_counts(nums))
